@@ -1,0 +1,7 @@
+target/
+nbproject/private/
+build/
+.mtj.tmp/
+*.jar
+*.class
+.DS_Store
