@@ -1,0 +1,10 @@
+ESTADOS
+q0|231.0|98.0|true|false|q0
+q1|230.0|220.0|false|true|q1
+q2|230.0|330.0|false|false|q2
+TRANSICIONES
+q0|q0|0
+q0|q1|1
+q1|q2|1
+q1|q1|0
+q2|q2|0,1
