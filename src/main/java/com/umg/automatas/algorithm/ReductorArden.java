@@ -4,6 +4,20 @@
  */
 package com.umg.automatas.algorithm;
 
+// =========================================================================
+// DESARROLLADO E INTEGRADO POR: Pablo Pichardo (Papichardog)
+// CURSO: Autómatas y Lenguajes Formales - UMG 2026
+// ALGORITMO: Reducción de Autómatas por el Método Algebraico de Arden
+// =========================================================================
+// Este componente procesa el grafo del autómata como un GNFA (Generalized 
+// NFA) utilizando una matriz bidimensional de Expresiones Regulares.
+// Aplica de forma iterativa el Lema de Arden: R = Q.R + P => R = (Q)*.P
+// eliminando secuencialmente los estados intermedios y recalculando las
+// aristas mediante el ciclo dinámico O(n³) de Floyd-Warshall:
+// R_ik' = R_ik U (R_ij · (R_jj)* · R_jk)
+// =========================================================================
+
+
 import com.umg.automatas.model.Automata;
 import com.umg.automatas.model.Estado;
 import com.umg.automatas.model.ExpresionRegular;
