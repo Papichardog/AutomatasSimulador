@@ -51,7 +51,7 @@ El proyecto está gestionado por **Apache Maven** y viene configurado para gener
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com
+git clone https://github.com/Papichardog/AutomatasSimulador.git
 cd AutomatasSimulador
 ```
 
