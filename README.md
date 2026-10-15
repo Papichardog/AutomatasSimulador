@@ -12,8 +12,8 @@
 * **Fecha:** Octubre de 2026
 
 ### Integrantes del Grupo
-1. **Pablo Pichardo** — Carné: 3190-24-19124 (Administrador / GitHub: Papichardog)
-2. **Homar Torres Franco** — Carné: 3190-24-13372 (GitHub: nano2633)
+1. **Pablo Andres Pichardo Galindo** — Carné: 3190-24-19124 (Administrador / GitHub: Papichardog)
+2. **Henry Homar Torres Franco** — Carné: 3190-24-13372 (GitHub: nano2633)
 3. **Jeshua Andreé Girón Pérez** — Carné: 3190-24-2965 (GitHub: Gironjeshua4-alt)
 4. **Diego Alejandro López Sequeira** — Carné: 3190-24-1653 (GitHub: Dlopez2205)
 5. **Hartwin Alexander Botello López** — Carné: 3190-24-1865 (GitHub: BibliotecaVirtualProg)

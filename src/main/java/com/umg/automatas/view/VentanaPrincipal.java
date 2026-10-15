@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.umg.automatas.view;
-
+//Ventana principal encargada de coordinar los paneles de swing
 import com.umg.automatas.controller.ControladorPrincipal;
 
 import javax.swing.*;
