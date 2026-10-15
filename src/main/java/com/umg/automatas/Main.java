@@ -5,6 +5,9 @@
 
 
 package com.umg.automatas;
+// Documentado por: BibliotecaVirtualProg
+// Punto de entrada principal de la aplicación. Inicializa el Controlador Principal,
+// crea el autómata inicial y despliega de forma segura el hilo de la Ventana Principal Swing.
 
 import com.umg.automatas.controller.ControladorPrincipal;
 import com.umg.automatas.view.VentanaPrincipal;
