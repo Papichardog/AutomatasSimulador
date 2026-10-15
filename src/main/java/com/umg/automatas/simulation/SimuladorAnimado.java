@@ -4,6 +4,14 @@
  */
 package com.umg.automatas.simulation;
 
+/**
+* control de simulacion animada de un automata finito Determinista.
+*
+* Procesa una cadena de entrada simbolo por simbolo administrando el tiempo 
+* entre trancisiones y notifica los cambios de estado a los observadores.
+* Parte documentada por Diego Alejandro Lopez Sequeira. (Dlopez2205)
+*/
+
 import com.umg.automatas.model.Automata;
 import com.umg.automatas.model.Estado;
 import com.umg.automatas.model.Transicion;
@@ -134,3 +142,4 @@ public class SimuladorAnimado {
         return estadoActual;
     }
 }
+// Docs: Documentación de la logica del temporizador y estados de animación.
