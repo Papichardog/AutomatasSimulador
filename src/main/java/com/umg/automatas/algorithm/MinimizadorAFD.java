@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.umg.automatas.algorithm;
 
 import com.umg.automatas.model.Automata;
@@ -95,13 +91,18 @@ public class MinimizadorAFD implements IAlgoritmoTransformacion {
         Map<Set<Estado>, Estado> nuevoPorClase = new LinkedHashMap<>();
 
         int contador = 0;
+        int columnas = 4;
+        double espacioX = 150, espacioY = 120;
         for (Set<Estado> clase : particion) {
             Estado representante = clase.iterator().next();
-            Estado nuevo = new Estado("C" + contador++, 0, 0);
+            Estado nuevo = new Estado("C" + contador,
+                    (contador % columnas) * espacioX,
+                    (contador / columnas) * espacioY);
             nuevo.marcarComoFinal(representante.esFinal());
             nuevo.marcarComoInicial(clase.contains(completo.getEstadoInicial()));
             nuevoPorClase.put(clase, nuevo);
             minimo.agregarEstado(nuevo);
+            contador++;
         }
 
         Map<List<Estado>, List<String>> simbolosPorPar = new LinkedHashMap<>();

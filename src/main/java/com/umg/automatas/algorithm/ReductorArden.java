@@ -58,9 +58,16 @@ public class ReductorArden implements IAlgoritmoReduccion {
         for (Transicion t : automataNormalizado.getTransiciones()) {
             int i = indice.get(t.getOrigen());
             int j = indice.get(t.getDestino());
-            ExpresionRegular etiqueta = t.esEpsilon()
-                    ? ExpresionRegular.epsilon()
-                    : ExpresionRegular.simbolo(t.getSimbolo());
+            ExpresionRegular etiqueta;
+if (t.esEpsilon()) {
+    etiqueta = ExpresionRegular.epsilon();
+} else {
+    etiqueta = ExpresionRegular.vacio();
+    for (String simb : t.getSimbolo().split(",")) {
+        etiqueta = ExpresionRegular.union(etiqueta, ExpresionRegular.simbolo(simb.trim()));
+    }
+}
+
             matrizExpresiones[i][j] = ExpresionRegular.union(matrizExpresiones[i][j], etiqueta);
         }
 

@@ -84,7 +84,8 @@ public class SimuladorAnimado {
         String simbolo = String.valueOf(cadena.charAt(posicion));
         Transicion usada = null;
         for (Transicion t : automata.getTransicionesDesde(estadoActualAFD)) {
-            if (t.getSimbolo().equals(simbolo)) {
+            // REEMPLAZADO: Se utiliza contieneSimbolo para soportar aristas con múltiples símbolos (ej. "0,1")
+            if (t.contieneSimbolo(simbolo)) {
                 usada = t;
                 break;
             }

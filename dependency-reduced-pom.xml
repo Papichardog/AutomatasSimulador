@@ -29,7 +29,7 @@
   </build>
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
-    <exec.mainClass>com.umg.automatas.Main</exec.mainClass>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <exec.mainClass>com.umg.automatas.Main</exec.mainClass>
   </properties>
 </project>
