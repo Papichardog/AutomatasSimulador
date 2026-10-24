@@ -5,7 +5,7 @@
     <artifactId>AutomatasSimulador</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>21</maven.compiler.release>
@@ -19,9 +19,17 @@
             <artifactId>jgraphx</artifactId>
             <version>4.2.2</version>
         </dependency>
+
+        <!-- FlatLaf: solo reskin visual de Swing (botones, menus, modo oscuro).
+             No reemplaza ni compite con JGraphX. -->
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.5.4</version>
+        </dependency>
     </dependencies>
 
-    <!-- BLOQUE NUEVO PARA CONSTRUIR EL JAR EJECUTABLE -->
+    <!-- BLOQUE PARA CONSTRUIR EL JAR EJECUTABLE -->
     <build>
         <plugins>
             <plugin>
@@ -47,4 +55,3 @@
         </plugins>
     </build>
 </project>
-

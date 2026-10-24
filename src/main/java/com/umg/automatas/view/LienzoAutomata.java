@@ -10,6 +10,8 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.view.mxGraph;
 
+import com.formdev.flatlaf.FlatLaf;
+
 import com.umg.automatas.controller.ControladorPrincipal;
 import com.umg.automatas.model.Automata;
 import com.umg.automatas.model.Estado;
@@ -17,12 +19,16 @@ import com.umg.automatas.model.Transicion;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LienzoAutomata extends JPanel {
+
+    private static final Color FONDO_CLARO = Color.WHITE;
+    private static final Color FONDO_OSCURO = new Color(0x2B2B2B);
 
     private final mxGraph graficoJGraphX;
     private final mxGraphComponent graphComponent;
@@ -53,6 +59,9 @@ public class LienzoAutomata extends JPanel {
         graphComponent.getGraphHandler().setCloneEnabled(false);
         add(graphComponent, BorderLayout.CENTER);
 
+        // Fondo inicial acorde al tema que ya este activo al construir la ventana
+        aplicarFondoSegunTema();
+
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evento) {
@@ -72,6 +81,12 @@ public class LienzoAutomata extends JPanel {
                 }
             }
         });
+    }
+
+    private void aplicarFondoSegunTema() {
+        Color fondo = FlatLaf.isLafDark() ? FONDO_OSCURO : FONDO_CLARO;
+        graphComponent.getViewport().setBackground(fondo);
+        graphComponent.setBackground(fondo);
     }
 
     public void setAutomata(Automata automata) {
@@ -106,7 +121,8 @@ public class LienzoAutomata extends JPanel {
 
         graficoJGraphX.getModel().beginUpdate();
         try {
-            Object arista = graficoJGraphX.insertEdge(padre, null, t.getSimbolo(), origen, destino);
+            Object arista = graficoJGraphX.insertEdge(padre, null, t.getSimbolo(),
+                    origen, destino, construirEstiloArista());
             celdaTransiciones.put(t, arista);
             transicionPorCelda.put(arista, t);
         } finally {
@@ -144,16 +160,64 @@ public class LienzoAutomata extends JPanel {
         }
     }
 
+    /** Relleno y color de letra de los circulos: ahora si sigue el tema. */
     private String construirEstilo(Estado e) {
+        boolean oscuro = FlatLaf.isLafDark();
         String forma = e.esFinal() ? "shape=doubleEllipse;" : "shape=ellipse;";
-        String borde = e.esInicial() ? "strokeColor=#2E7D32;strokeWidth=3;" : "strokeColor=#1565C0;strokeWidth=1;";
-        return forma + "fillColor=#E3F2FD;" + borde;
+        String relleno = oscuro ? "fillColor=#37474F;" : "fillColor=#E3F2FD;";
+        String fuente = oscuro ? "fontColor=#FFFFFF;" : "fontColor=#000000;";
+        String borde = e.esInicial()
+                ? "strokeColor=#2E7D32;strokeWidth=3;"
+                : (oscuro ? "strokeColor=#64B5F6;strokeWidth=1;" : "strokeColor=#1565C0;strokeWidth=1;");
+        return forma + relleno + fuente + borde;
     }
 
     private String construirEstiloResaltado(Estado e) {
         String forma = e.esFinal() ? "shape=doubleEllipse;" : "shape=ellipse;";
         String borde = e.esInicial() ? "strokeColor=#2E7D32;strokeWidth=3;" : "strokeColor=#F57F17;strokeWidth=1;";
-        return forma + "fillColor=#FFF176;" + borde;
+        // Amarillo con texto negro se lee bien en ambos temas, no hace falta variarlo
+        return forma + "fillColor=#FFF176;fontColor=#000000;" + borde;
+    }
+
+    /**
+     * Estilo de las flechas (aristas) y sus etiquetas segun el tema:
+     *  - Tema oscuro  -> trazo y texto BLANCOS
+     *  - Tema claro   -> trazo y texto NEGROS
+     */
+    private String construirEstiloArista() {
+        String color = FlatLaf.isLafDark() ? "#FFFFFF" : "#000000";
+        return "strokeColor=" + color + ";"
+             + "fontColor=" + color + ";"
+             + "fontSize=14;"
+             + "labelBackgroundColor=none;"
+             + "verticalLabelPosition=top;"
+             + "verticalAlign=bottom;"
+             + "endArrow=classic;endSize=8;startSize=6;";
+    }
+
+    /**
+     * Reaplica el estilo de aristas, estados y el fondo del lienzo al tema LAF actual.
+     * Se llama desde VentanaPrincipal al cambiar de tema.
+     */
+    public void actualizarEstilosTema() {
+        aplicarFondoSegunTema();
+        graficoJGraphX.getModel().beginUpdate();
+        try {
+            String estiloArista = construirEstiloArista();
+            for (Object arista : transicionPorCelda.keySet()) {
+                graficoJGraphX.setCellStyle(estiloArista, new Object[]{arista});
+            }
+            for (Map.Entry<Estado, Object> entry : celdaEstados.entrySet()) {
+                Estado est = entry.getKey();
+                Object celda = entry.getValue();
+                String estilo = est.equals(estadoResaltadoActual)
+                        ? construirEstiloResaltado(est)
+                        : construirEstilo(est);
+                graficoJGraphX.setCellStyle(estilo, new Object[]{celda});
+            }
+        } finally {
+            graficoJGraphX.getModel().endUpdate();
+        }
     }
 
     public void limpiarLienzo() {
