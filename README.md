@@ -47,21 +47,29 @@ El código fuente se encuentra rígidamente estructurado en el paquete raíz `co
 
 ## Instrucciones de Compilación y Ejecución
 
-El proyecto está gestionado por **Apache Maven** y viene configurado para generar un **Fat-JAR** ejecutable e independiente que incluye la librería JGraphX embebida en su interior.
+El proyecto está gestionado por **Apache Maven** y viene configurado para generar un **Fat-JAR** ejecutable e independiente que incluye las librerías JGraphX y FlatLaf embebidas en su interior.
 
-### 1. Clonar el repositorio
+### 📥 1. Obtención del código por primera vez (Clonar)
+Si no se dispone del repositorio localmente, ejecutar en terminal:
 ```bash
 git clone https://github.com/Papichardog/AutomatasSimulador.git
 cd AutomatasSimulador
 ```
 
-###  2. Limpiar y Empaquetar el ejecutable (Generar el .jar)
+### 🔄 2. Actualizar a la versión más reciente (Jalar Cambios)
+Si ya se clonó el programa anteriormente pero se desea actualizar el entorno local con los últimos cambios y optimizaciones visuales (como la integración del modo oscuro/claro con **FlatLaf**), ejecutar dentro de la carpeta del repositorio:
+```bash
+git pull origin main
+```
+
+### 🔨 3. Limpiar y Empaquetar el ejecutable (Generar el .jar)
+Para compilar y fusionar todas las dependencias en el binario final, ejecutar:
 ```bash
 mvn clean package
 ```
-*Este comando compilará el código fuente y creará un archivo ejecutable unificado de aproximadamente **892 KB** en la ruta `target/AutomatasSimulador-1.0-SNAPSHOT.jar`.*
+*Este comando compilará el código fuente y creará un archivo ejecutable unificado de aproximadamente **1.8 MB** en la ruta `target/AutomatasSimulador-1.0-SNAPSHOT.jar`.*
 
-###  3. Ejecutar desde la terminal
+### 🚀 4. Ejecutar desde la terminal
 ```bash
 java -jar target/AutomatasSimulador-1.0-SNAPSHOT.jar
 ```
